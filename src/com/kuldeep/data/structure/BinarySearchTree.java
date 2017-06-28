@@ -1,5 +1,7 @@
 package com.kuldeep.data.structure;
 
+import java.util.Vector;
+
 public class BinarySearchTree {
 	class Node {
 		public int key;
@@ -22,6 +24,42 @@ public class BinarySearchTree {
 	 */
 	public void insert(int key){
 		root = insertRec(root, key);
+	}
+	
+	/*
+	 * Inorder traversal to traverse BST in sorted order always
+	 */
+	public void inorder(Node root, Vector<Node> nodes){
+		if(root == null){
+			return;
+		}
+		/*
+		 * It will traverse till the left leaf is available in tree, when not found start adding to the Vector array
+		 */
+		inorder(root.left, nodes);
+		nodes.add(root);
+		/*
+		 * Then traverse the right part of the main root, and start adding node from start into vector array.
+		 * It will take O(n) time as need to traverse all element into tree.
+		 */
+		inorder(root.right, nodes);
+	}
+	/*
+	 * This function would make the balanced binary tree, it would also take O(n) time, 
+	 * as we would visit each element of the sorted array
+	 */
+	public Node buildBalancedBinaryTree(Vector<Node> nodes, int start, int end){
+		if(start > end){
+			return null;
+		}
+		
+		int mid = start + (end - start)/2;
+		Node node = nodes.get(mid);
+		
+		node.left = buildBalancedBinaryTree(nodes, start, mid-1);
+		node.right = buildBalancedBinaryTree(nodes, start, mid-1);
+		
+		return node;
 	}
 	
 	private Node insertRec(Node root, int key){

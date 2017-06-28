@@ -57,5 +57,42 @@ public class MajorityElement {
 		}
 		return root;
 	}
+	
+	/*
+	 * Moore's voting algorithm
+	 */
+	private int maximumElement(int[] arr, int size){
+		int maxIndex = 0, count = 1;
+		
+		for(int i = 0; i < size; i++){
+			if(arr[maxIndex] == arr[i]){
+				count++;
+			}
+			else{
+				count--;
+			}
+			
+			if(count == 0){
+				maxIndex = i;
+				count = 1;
+			}
+		}
+		
+		return arr[maxIndex];
+	}
+	
+	private int countNoOfTimesMaxElementInArr(int[] arr, int size){
+		int maxNum = maximumElement(arr, size);
+		int count = 0;
+		for(int i = 0; i < size; i++){
+			if(count == size/2){
+				return arr[i];
+			}
+			if(arr[i] == maxNum){
+				count += 1;
+			}
+		}
+		return 0;
+	}
 
 }
