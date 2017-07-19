@@ -8,10 +8,9 @@ import java.util.Map;
 
 import javax.ws.rs.HttpMethod;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.junit.Assert;
 import org.junit.Test;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class HttpBuildTest {
 	
