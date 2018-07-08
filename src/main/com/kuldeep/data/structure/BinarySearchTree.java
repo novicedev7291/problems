@@ -29,7 +29,7 @@ public class BinarySearchTree {
 	/*
 	 * Inorder traversal to traverse BST in sorted order always
 	 */
-	public void inorder(Node root, Vector<Node> nodes){
+	private void inorder(Node root, Vector<Node> nodes){
 		if(root == null){
 			return;
 		}
@@ -44,8 +44,34 @@ public class BinarySearchTree {
 		 */
 		inorder(root.right, nodes);
 	}
+
+	public void preOrder(){
+		preOrderTraversal(root);
+	}
+
+	private void preOrderTraversal(Node root){
+		if(root == null){
+			return;
+		}
+
+		System.out.print("\t" + root.key);
+		preOrderTraversal(root.left);
+		preOrderTraversal(root.right);
+	}
+
+	public void inorder(){
+		inorderTraversal(root);
+	}
+
+	private void inorderTraversal(Node root){
+		if(root == null) return;
+
+		inorderTraversal(root.left);
+		System.out.print("\t"+root.key);
+		inorderTraversal(root.right);
+	}
 	/*
-	 * This function would make the balanced binary tree, it would also take O(n) time, 
+	 * This function would make the balanced binary tree(assumes array is sorted always), it would also take O(n) time,
 	 * as we would visit each element of the sorted array
 	 */
 	public Node buildBalancedBinaryTree(Vector<Node> nodes, int start, int end){
@@ -57,7 +83,7 @@ public class BinarySearchTree {
 		Node node = nodes.get(mid);
 		
 		node.left = buildBalancedBinaryTree(nodes, start, mid-1);
-		node.right = buildBalancedBinaryTree(nodes, start, mid-1);
+		node.right = buildBalancedBinaryTree(nodes, mid-1, end);
 		
 		return node;
 	}
@@ -93,6 +119,61 @@ public class BinarySearchTree {
 		if(root.key > key)
 			search(root.left, key);
 		return search(root.right, key);
+	}
+
+	public void delete(int key){
+		root = deleteNode(root, key);
+	}
+
+	private Node deleteNode(Node root, int key) {
+		if(root == null) return null;
+
+		//Find the matching node with key to be deleted
+		// If less then traverse the left tree
+		if(key < root.key){
+			root.left = deleteNode(root.left, key);
+		}// if greater then travers the right tree
+		else if(key > root.key){
+			root.right = deleteNode(root.right, key);
+		}
+		else //Matching node is found
+		{
+			if(root.left == null){
+				return root.right;
+			}else if(root.right == null){
+				return root.left;
+			}
+			root.key = inorderSuccessor(root.right);
+			root.right = deleteNode(root.right, root.key);
+		}
+		return root;
+	}
+
+	private int inorderSuccessor(Node node) {
+		int min = node.key;
+		while(node.left != null){
+			min = node.left.key;
+			node = node.left;
+		}
+		return min;
+	}
+
+	public int height(){
+		return getHeight(root);
+	}
+
+	private int getHeight(Node root) {
+		if(root == null){
+			return 0;
+		}
+
+		int lHeight = getHeight(root.left);
+		int rHeight = getHeight(root.right);
+
+		if(lHeight > rHeight){
+			return lHeight  + 1;
+		}
+		return rHeight + 1;
 	}
 
 }

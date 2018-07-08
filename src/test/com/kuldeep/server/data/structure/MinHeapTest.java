@@ -1,7 +1,6 @@
 package com.kuldeep.server.data.structure;
 
 import com.kuldeep.data.structure.MinHeap;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 

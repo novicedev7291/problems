@@ -49,7 +49,7 @@ public class QuickSort {
 			}
 		}
 		/*
-		 * At a point when i and j crosses each other or equals to each other
+		 * At a point when i and j crosses each other
 		 * , we need to divide the array into two subproblems and then repeat above
 		 * steps again.
 		 */

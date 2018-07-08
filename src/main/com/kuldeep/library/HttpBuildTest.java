@@ -1,16 +1,15 @@
 package com.kuldeep.library;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.junit.Assert;
+import org.junit.Test;
+
+import javax.ws.rs.HttpMethod;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.ws.rs.HttpMethod;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
-import org.junit.Assert;
-import org.junit.Test;
 
 public class HttpBuildTest {
 	

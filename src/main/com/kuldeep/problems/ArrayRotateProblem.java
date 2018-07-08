@@ -58,15 +58,69 @@ public class ArrayRotateProblem {
 			arr[fi+i] = temp;
 		}
 	}
+
+	static void rotateByd(int[] arr, int d){
+		int N = arr.length;
+		int i = 0;
+		int k = (N - d);
+		int j = k;
+		int temp = -1;
+
+		while(i != k){
+			temp = arr[i];
+			arr[i] = arr[j];
+			arr[j] = temp;
+			i++;
+			j++;
+		}
+
+		temp = arr[i];
+		arr[i] = arr[j];
+		arr[j] = temp;
+
+	}
+
+	static void rotateByCopy(int[] arr, int d){
+		int N = arr.length;
+		int[] temp = new int[d];
+		int i = 0;
+		for(; i < d ; i++){
+			temp[i] = arr[i];
+		}
+
+		for(i = d; i < N; i++){
+			arr[i - d] = arr[i];
+		}
+
+		for(i = N - d; i < N; i++){
+			arr[i] = temp[i - N + d];
+		}
+	}
+
+	static void rotateByD2(int[] arr, int d){
+		int N = arr.length;
+
+		for(int i = 0; i < d; i++){
+			int temp = arr[0];
+			int j = 0;
+			for(; j < N-1; j++){
+				arr[j] = arr[j+1];
+			}
+			arr[j] = temp;
+		}
+	}
 	
 	public static void main(String[] args){
 		ArrayRotateProblem o = new ArrayRotateProblem();
-		int[] arr = {1,2,3,4};
-		o.rotateArrayByIterativeDivideApproach(arr, 2, arr.length);
+		int[] arr = {1,2,3,4,5,6,7};
+		//o.rotateArrayByIterativeDivideApproach(arr, 2, arr.length);
+
+		//rotateByD2(arr, 2);
+		rotateByCopy(arr, 2);
 		
 		System.out.println();
 		for(int i = 0 ;i < arr.length; i++){
-			System.out.print(arr[i] + "\t ");
+			System.out.print(arr[i] + " ");
 		}
 	}
 }
