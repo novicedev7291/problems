@@ -1,35 +1,23 @@
 package com.kuldeep.data.structure;
 
 public class RBTree {
-    private Node root, parent;
+    private Node root;
 
     class Node{
-        public static final String BLACK = "B";
-        public static final String RED = "R";
-        int e;
-        Node left, right;
-        String color = RED;
+        public static final int BLACK = 0;
+        public static final int RED = 1;
+        int e, color;
+        Node left, right, parent, uncle;
 
         Node(int e){
             this.e = e;
             this.right = this.left = null;
+            this.color = RED;
         }
     }
 
     public Node insert(Node root, int e){
-        if(root == null){
-            root = new Node(e);
-            return root;
-        }
 
-        if(e < root.e){
-            root.left = insert(root.left, e);
-        }
-        else{
-            root.right = insert(root.right, e);
-        }
-
-        parent = root;
 
         return root;
 
