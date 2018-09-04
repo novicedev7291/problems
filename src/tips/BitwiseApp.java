@@ -1,6 +1,6 @@
 package tips;
 
-public class BitwiseApp {
+public classBitwiseApp {
 
 	public static void main(String[] args){
 		BitwiseApp app = new BitwiseApp();
