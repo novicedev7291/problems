@@ -1,6 +1,6 @@
 package com.kuldeep.data.structure.lists;
 
-import java.util.Scanner;
+import java.util.*;
 
 public class LinkedLists {
     class LLNode
@@ -47,6 +47,19 @@ public class LinkedLists {
         return head;
     }
 
+    public LLNode reverse(LLNode head){
+        LLNode cur = head;
+        LLNode prev = null;
+        LLNode temp = head;
+        while(temp != null){
+            cur = temp;
+            temp = temp.next;
+            cur.next = prev;
+            prev = cur;
+        }
+        return cur;
+    }
+
     public static void main(String[] args) {
         Scanner sc= new Scanner(System.in);
         int t = sc.nextInt();
@@ -61,15 +74,15 @@ public class LinkedLists {
 
             ll.printList(head);
             //head = ll.deleteNode(head, 5);
-            head = ll.deleteNode(head, 5);
-            System.out.println(head.data);
-            head = ll.deleteNode(head, 3);
+            //head = ll.deleteNode(head, 5);
             //System.out.println(head.data);
-            ll.printList(head);
-            head = ll.deleteNode(head, 3);
+            //head = ll.deleteNode(head, 3);
+            //System.out.println(head.data);
+            //ll.printList(head);
+            //head = ll.deleteNode(head, 3);
             //ll.deleteNode(head, 1);
+            head = ll.reverse(head);
             ll.printList(head);
         }
-
     }
 }
