@@ -1,0 +1,91 @@
+Problem: reperesent friends list using map (Graph representation).
+
+Approach:
+
+Map<Integer, Queue<Integer>> g = new TreeMap<>();
+
+Class Test{
+	public static void main(String[] args){
+		Scanner sc = new Scanner(System.in);
+		int t = sc.nextInt();
+		while(t-- != 0){
+			int V = sc.nextInt();
+			int E = sc.nextInt();
+
+			Map<Integer, Queue<Integer>> g = new TreeMap<>();
+
+			for(int v = 0 ; v < V; v++){
+				Queue<Integer> q = new LinkedList<>();
+				g.put(v, q);
+			}
+
+			for(int i = 0 ; i < E; i++){
+				Integer vi = sc.nextInt();
+				Integer ei = sc.nextInt();
+				map.get(vi).add(ei);
+				map.get(ei).put(vi);
+			}
+
+			for(Map.Entry<Integer, Queue<Integer>> v: g.entrySet()){
+				System.out.printf("%d : ", v.getKey());
+				Queue<Integer> links = v.getValue();
+				while(!links.isEmpty()){
+					System.out.printf("%d ", links.remove());
+				}
+				System.out.println();
+			}
+		}
+	}
+}
+
+
+void dfs(HashMap<Integer, ArrayList<Integer> > g){
+	Integer[] visited = new Integer[g.size];
+	for(int i = 0; i < visited.length; i++){
+		visited[i] = 0;
+	}
+	for(Map.Entry<Integer, ArrayList<Integer>> e: g.entrySet()){
+		if(visited[e.getKey()] == 0){
+			dfsHelper(g, e.getKey(), visited);
+		}
+	}
+}
+
+void dfsHelper(Integer v, Integer[] visited){
+	visited[v] = 1;
+	System.out.printf("%d ", v)
+	List<Integer> l = g.get(v);
+	for(Integer link : l){
+		if(visited[link] == 0){
+			dfsHelper(link, visited);
+		}
+	}
+}
+
+void bfs(HashMap<Integer, ArrayList<Integer> > g, int s){
+	Integer[] visited = new Integer[g.size];
+	for(int i = 0; i < visited.length; i++){
+		visited[i] = 0;
+	}
+	Queue<Integer> queue = new LinkedList<>();
+	
+	if(visited[s] == 0){
+			queue.add(e.getKey());
+			bfsHelper(g, s, visited, queue);
+	}
+	
+}
+
+void bfsHelper(HashMap<Integer, ArrayList<Integer> > g, int v, Integer[] visited, Queue<Integer> queue){
+	while(!queue.isEmpty()){
+		Integer v = queue.remove();
+		visited[v] = 1;
+		System.out.printf("%d ", v);
+		List<Integer> links = g.get(v);
+		for(Integer l : links){
+			if(visited[l] == 0){
+				queue.add(l);
+			}
+		}
+	}
+}
