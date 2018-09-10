@@ -5,24 +5,6 @@ import java.util.Scanner;
 public class Farida {
     long[] arr;
     int N;
-    long[] dp;
-    public long maxCoins(long[] arr){
-        N = arr.length;
-        this.arr = arr;
-        dp = new long[N];
-        for(int i = 0; i < N; i++){
-            dp[i] = 0;
-        }
-        return maxCoinsHelper(0);
-    }
-
-    private long maxCoinsHelper(int i) {
-        if(i >= N) return 0;
-
-        if(dp[i] != 0) return dp[i];
-
-        return dp[i] = Math.max(arr[i] + maxCoinsHelper(i+2), maxCoinsHelper(i+1));
-    }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -40,5 +22,14 @@ public class Farida {
         }
     }
 
+    long maxCoins(long[] arr){
+        N = arr.length;
+        this.arr = arr;
+        return maxCoinsHelper(0);
+    }
 
+    long maxCoinsHelper(int index){
+        if(index >= N) return 0;
+        return  Math.max(arr[index] + maxCoinsHelper(index+2), maxCoinsHelper(index+1));
+    }
 }

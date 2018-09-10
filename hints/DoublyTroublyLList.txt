@@ -1,0 +1,24 @@
+Doubly troubly linked list, each node is pointing to next node as any other list but also have one more pointer pointing to any other node in linked list (troubly pointer).
+
+
+class DLLNode
+{
+  int data;
+  DLLNode d;
+  DLLNode t;
+  DLLNode(int v) {data = v; d= null; t=null;}
+}
+class BeingZeroDLL
+{
+	DLLNode clone(DLLNode h)
+	{
+		DLLNode t = h;
+		DLLNode nHead = new DLLNode(h.data);
+		DLLNode t1 = nHead;
+		while(t.next != null){
+			t = t.next;
+			DLLNode v = new DLLNode(t.data);
+		}
+
+	}
+}
