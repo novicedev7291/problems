@@ -1,0 +1,22 @@
+
+int mid;
+boolean isOdd = false;
+int	len;
+
+boolean hasEqualSumPartitions(int arr[]) {
+	len = arr.length;
+	return hasSumPartitionHelper(arr, 0, 0, 0);
+}
+
+
+boolean hasSumPartitionHelper(int arr[], int idx, int fps, int sps){
+	if(idx == len) return false;
+	
+	if(fps == sps) return true;
+
+	boolean isAvailable = hasSumPartitionHelper(arr, idx + 1, fps + arr[idx], sps);
+	if(isAvailable)
+		return isAvailable;
+	return hasSumPartitionHelper(arr, idx + 1, fps, sps + arr[idx]);
+
+}
