@@ -1,0 +1,3 @@
+1. String given with letters `a`,`b` or `/`.
+2. Cost given for a replacement i.e 4 and for b 6
+3. Return the minimum cost to make string palindrome replacing `/` with a or b.

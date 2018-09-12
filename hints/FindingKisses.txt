@@ -1,0 +1,28 @@
+1. Matrix M x N
+2. Word i.e KISS
+3. true or false if matrix has word or not.
+4. Can move only right and down i.e i + 1, j + 1
+
+char[][] grid;
+char[] word;
+int WLen, rows, cols;
+boolean hasWordHelper(int i, int j, int wi){
+	if(i == rows || j == cols || wi == WLen) return false;
+	// All letters of words are checked
+	if(wi == WLen) return true;
+
+	if(grid[i][j] == word[wi] && wi < WLen){
+		// Two possibilities here, that next char would be at right or down
+		boolean nextRight = hasWordHelper(i, j+1, wi+1);
+		if(nextRight)
+			return nextRight;
+		return hasWordHelper(i+1, j, wi + 1);
+	}
+
+	//That means first matching letter has not been found yet
+	if(wi == 0){
+		return hasWordHelper(i+1, j, wi) || hasWordHelper(i, j+1, wi);
+	}
+	// That means continuity of words cannot be found
+	return false;
+}

@@ -1,0 +1,27 @@
+1. Merge two sorted list
+
+	1 -> 4 -> 6 -> 9
+	2 -> 3 -> 7 -> 10
+
+	
+		 
+
+Approach 1:
+
+1. Compare h1.data and h2.data
+
+LLNode smaller(LLNode h1, LLNode h2){
+	if(h1 == null) return h2;
+	if(h2 == null) return h1;
+	if(h1.data <= h2.data){
+		h1.next = smaller(h2, h1.next);
+	}
+	else{
+		h2.next = smaller(h1, h2.next);
+	}
+	return h1.data <= h2.data ? h1 : h2;
+}
+
+LLNode mergeSorted(LLNode first, LLNode second){
+	return smaller(first, second);
+}

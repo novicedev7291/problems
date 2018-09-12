@@ -1,0 +1,32 @@
+void spiralOrderTraversal(BSTNode root) {
+	if(root == null) return;
+	// From L TO R
+	Stack<BSTNode> s1 = new Stack<BSTNode>();
+	// From R TO L
+	Stack<BSTNode> s2 = new Stack<BSTNode>();
+
+	s1.push(root);
+	
+	//if(root.left != null) s2.push(root.left);
+	//if(root.right != null) s2.push(root.right);
+
+	while(!s1.isEmpty() || !s2.isEmpty()){
+		// L TO R
+		while(!s1.isEmpty()){
+			BSTNode root = s1.pop();
+			System.out.printf("%d ", root.data);
+			if(root.left != null) s2.push(root.left);
+			if(root.right != null) s2.push(root.right);
+		}
+
+		// R TO L
+		while(!s2.isEmpty()){
+			BSTNode root = s2.pop();
+			System.out.printf("%d ", root.data);
+			if(root.right != null) s1.push(root.right);
+			if(root.left != null) s1.push(root.left);
+		}
+
+
+	}
+}

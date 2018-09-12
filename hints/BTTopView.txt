@@ -1,0 +1,25 @@
+class BeingZero
+{
+      Map<Integer, Integer> view = new TreeMap<>();
+      int topView(BTNode root)
+      {
+            topViewHelper(root, 0, false);
+            for(Map.Entry<Integer, Integer> e: view.entrySet()){
+                System.out.printf("%d ", e);        
+            }
+            return 0;
+
+      }
+  
+      void topViewHelper(BTNode root, int serialNo, boolean right){
+        if(root == null) return;
+        topViewHelper(root.left, serialNo-1, false);
+        if(view.containsKey(serialNo) && (serialNo > 0 && right)){
+            view.put(serialNo, root.data);
+        }
+        else if(!view.containsKey(serialNo)){
+          view.put(serialNo, root.data);
+        }
+        topViewHelper(root.right, serialNo+1, true);
+    }
+}

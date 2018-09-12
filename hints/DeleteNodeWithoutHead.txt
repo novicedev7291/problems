@@ -1,0 +1,13 @@
+1. delete node with pointer to node needs to be deleted given
+
+class LLNode{
+	int data;
+	LLNode next;
+}
+
+void deleteNode(LLNode nodeToDelete){
+	LLNode next = nodeToBeDeleted.next;
+	nodeToDelete.data = next.data;
+	nodeToDelete.next = next.next;
+	next.next = null;
+}

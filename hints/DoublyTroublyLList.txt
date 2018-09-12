@@ -12,13 +12,56 @@ class BeingZeroDLL
 {
 	DLLNode clone(DLLNode h)
 	{
-		DLLNode t = h;
-		DLLNode nHead = new DLLNode(h.data);
-		DLLNode t1 = nHead;
-		while(t.next != null){
-			t = t.next;
-			DLLNode v = new DLLNode(t.data);
+		if(h == null) return null;
+		DLLNode temp = h;
+		List<DLLNode> copyList = new LinkedList();
+
+		Map<Integer, Queue<DLLNode>> pointerMap = new HashMap<>();  
+
+		while(temp != null){
+			if(pointerMap.containsKey(temp.data)){
+				Queue<DLLNode> q = pointerMap.get(temp.data);
+				q.add(temp.d);
+				pointerMap.put(temp.data, q);
+			}else{
+				Queue<DLLNode> q = new LinkedList();
+				q.add(temp.d);
+				pointerMap.put(temp.data, q);
+			}
 		}
 
+		temp = head;
+
+		while(temp != null){
+			DLLNode n = new DLLNode(temp.data);
+			copyList.add(n);
+			DLLNode current = temp;
+			temp = temp.d;
+			current.d = n;
+			n.t = current;
+		}
+
+		for(DLLNode head: copyList){
+			if(head.t.t != null){
+				head.t = head.t.t.d;
+			}
+			else{
+				head.t = null;
+			}
+		}
+
+		temp = head;
+		while(temp != null){
+			Queue<DLLNode> q = pointerMap.get(temp.data);
+			if(q != null && !q.isEmpty()){
+				DLLNode next = q.remove();
+				temp.d = next;
+			}else{
+				temp.d = null;
+			}
+			temp = temp.d;
+		}
+
+		return copyList.peek();
 	}
 }

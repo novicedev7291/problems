@@ -1,0 +1,39 @@
+LCA - Least common adjuster in tree
+
+isAPresent = false;
+isBPresent = false;
+BTNode lca(BTNode root, BTNode a, BTNode b){
+	if(isAPresent && isBPresent) return lcaUtil(root, a, b);
+	return null;
+}
+
+BTNode lcaUtil(BTNode root, BTNode a, BTNode b)
+{
+	if(root == null) return null;
+
+	BTNode left = lca(root.left, a, b);
+	BTNode right = lca(root.right, a, b);
+
+	if(root.data == a.data){
+		isAPresent = true;
+		return root;
+	}
+
+	if(root.data == b.data){
+		isBPresent = true;
+		return root;
+	}
+
+	if(left != null && right != null){
+		return root;
+	}
+
+	if(left == null){
+		return right;
+	}
+
+	if(right == null){
+		return left;
+	}
+     
+}

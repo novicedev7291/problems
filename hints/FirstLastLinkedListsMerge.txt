@@ -1,0 +1,48 @@
+1. Rearrange singly linked list in such a way that it becomes
+	1 -> 2 -> 3 -> 4 -> 5 -> 6
+	1 -> 6 -> 2 -> 5 -> 3 -> 4
+
+Approach: 
+1. Find the middle of Linked list
+2. Reverse the second list from middle
+3. Then it becomes the alternate merge question
+
+
+LLNode findMiddle(LLNode head){
+	LLNode s = head,f = head;
+	while(f != null && f.next != null){
+		f = f.next.next;
+		if(f == null){
+			return s;
+		}
+		s = s.next;
+	}
+	return s;
+}
+
+LLNode reverse(LLNode head){
+	LLNode cur = head, temp = head, prev = null;
+	while(temp != null){
+		cur = temp;
+		temp = temp.next;
+		cur.next = prev;
+		prev = cur;
+	}
+	return cur;
+}
+
+LLNode alternateArrange(LLNode h1, LLNode h2){
+	if(h1 == null) return h2;
+	if(h2 == null) return h1;
+	h1.next = alternateArrange(h2, h1.next);
+	return h1;
+}
+
+void frontLastRearrange(LLNode head)
+{
+	if(head == null) return;
+	LLNode mid = findMiddle(head);
+	LLNode nHead = reverse(mid.next);
+	mid.next = null;
+	head = alternateArrange(head, nHead);
+}

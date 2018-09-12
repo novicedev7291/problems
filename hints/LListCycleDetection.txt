@@ -1,0 +1,25 @@
+Given linked list have a cycle where last node may be pointing to any of the previous node, remove the cycle.
+
+Approach 1:
+
+void removeCycle(LLNode head){
+	if(head == null || head.next == null) return;
+	LLNode fast = head, slow = head;
+	fast = fast.next.next;
+	slow = slow.next;
+	while(fast != null && fast.next != null){
+		if(slow == fast){
+			break;
+		}
+		fast = fast.next.next;
+		slow = slow.next;
+	}
+
+	if(slow == fast){
+		while(slow.next != fast.next){
+			slow = slow.next;
+			fast = fast.next;
+		}
+		fast.next = null;
+	}
+}

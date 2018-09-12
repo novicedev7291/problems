@@ -1,0 +1,5 @@
+LLNode alternateMerge(LLNode h1, LLNode h2){
+	if(h1 == null) return h2;
+	if(h2 == null) return h1;
+	return h1.next = alternateMerge(h2, h1.next);
+}

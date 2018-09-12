@@ -1,0 +1,49 @@
+1. Prove singly linked list is palindromic
+
+Approach 3:
+
+1. First find out the middle of linked list
+
+LLNode getMiddle(LLNode head){
+	LLNode slow = head;
+	LLNode fast = head;
+	while(fast != null && fast.next != null){
+		fast = fast.next.next;
+		if(fast == null){
+			return slow;
+		}
+		slow = slow.next;
+	}
+	return slow;
+}
+
+2. Reverse the linked list with 3 pointer approach
+
+LLNode reverse(LLNode head){
+	LLNode cur = head;
+	LLNode prev = null;
+	LLNode temp = head;
+	while(temp != null){
+		cur = temp;
+		prev = curr;
+		temp = temp.next;
+		cur.next = prev;
+	}
+	return temp;
+}
+
+3. Start comparing two halves of list
+
+boolean isPalindromicList(LLNode A){
+	if(A == null) return true;
+	LLNode mid = findMiddle(A);
+	LLNode s = reverse(mid.next);
+	while(s != null){
+		if(s.data != A.data){
+			return false;
+		}
+		A = A.next;
+		s = s.next;
+	}
+	return true;
+}

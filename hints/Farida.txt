@@ -1,0 +1,6 @@
+int maxCoinsHelper(int index){
+	if(index >= N) return 0;
+	int s1 = arr[index] + maxCoinsHelper(index+2);
+	int s2 = maxCoinsHelper(index+1);
+	return Math.max(s1, s2);
+}

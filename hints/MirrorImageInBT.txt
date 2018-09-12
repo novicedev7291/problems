@@ -1,0 +1,13 @@
+If tree has mirror image
+
+Approach 1:
+
+boolean hasMirrorImage(BTNode root1, BTNode root2){
+	if(root1 == null && root2 == null) return true;
+	if(root1 == null || root2 == null) return false;
+
+	if(root1.data == root2.data){
+		return hasMirrorImage(root1.left, root2.right) && hasMirrorImage(root1.right, root2.left);
+	}
+	return false;
+}
