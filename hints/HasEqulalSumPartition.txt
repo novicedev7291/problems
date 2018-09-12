@@ -11,12 +11,8 @@ boolean hasEqualSumPartitions(int arr[]) {
 
 boolean hasSumPartitionHelper(int arr[], int idx, int fps, int sps){
 	if(idx == len) return false;
-	
-	if(fps == sps) return true;
-
-	boolean isAvailable = hasSumPartitionHelper(arr, idx + 1, fps + arr[idx], sps);
-	if(isAvailable)
-		return isAvailable;
-	return hasSumPartitionHelper(arr, idx + 1, fps, sps + arr[idx]);
-
+	boolean fp = hasSumPartitionHelper(arr, idx + 1, fps + arr[idx], sps);
+	boolean sp = hasSumPartitionHelper(arr, idx + 1, fps, sps + arr[idx]);
+    if(fps == sps) return true;
+    return fp || sp;
 }
