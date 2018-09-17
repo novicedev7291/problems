@@ -14,7 +14,7 @@ class BeingZeroDLL
 	{
 		if(h == null) return null;
 		DLLNode temp = h;
-		List<DLLNode> copyList = new LinkedList();
+		LinkedList<DLLNode> copyList = new LinkedList();
 
 		Map<Integer, Queue<DLLNode>> pointerMap = new HashMap<>();  
 
@@ -30,7 +30,7 @@ class BeingZeroDLL
 			}
 		}
 
-		temp = head;
+		temp = h;
 
 		while(temp != null){
 			DLLNode n = new DLLNode(temp.data);
@@ -50,7 +50,7 @@ class BeingZeroDLL
 			}
 		}
 
-		temp = head;
+		temp = h;
 		while(temp != null){
 			Queue<DLLNode> q = pointerMap.get(temp.data);
 			if(q != null && !q.isEmpty()){
