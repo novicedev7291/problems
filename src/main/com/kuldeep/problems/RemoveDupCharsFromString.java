@@ -1,5 +1,8 @@
 package com.kuldeep.problems;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class RemoveDupCharsFromString {
 
     public static void main(String[] args) {
@@ -7,6 +10,7 @@ public class RemoveDupCharsFromString {
     }
 
     private static void removeDupChars(char[] arr){
+        HashSet a;
         int number = 0, j = 0, count = 0;
         for(int i = 0; i < arr.length; i++){
             byte pos = (byte)(((byte) arr[i] - 97) + 1);

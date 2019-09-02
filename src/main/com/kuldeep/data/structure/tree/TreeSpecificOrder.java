@@ -1,8 +1,8 @@
-package com.kuldeep.data.structure.Tree;
+package com.kuldeep.data.structure.tree;
 
 import java.util.*;
 import java.lang.*;
-import java.io.*;
+
 class BTNode
 {
     int data;

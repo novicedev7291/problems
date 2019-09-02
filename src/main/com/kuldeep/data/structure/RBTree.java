@@ -50,7 +50,7 @@ public class RBTree {
      * <li>Property 5 (all paths from any given node to its leaves have the same number of black nodes) is threatened only by adding a black node, repainting a node, or a rotation.</li>
      * </ul>
      *
-     * <p>For more information check this out @see <a href="https://en.wikipedia.org/wiki/Red%E2%80%93black_tree">RedBlack Tree wiki</a>
+     * <p>For more information check this out @see <a href="https://en.wikipedia.org/wiki/Red%E2%80%93black_tree">RedBlack tree wiki</a>
      * </p>
      *
      * @param n
