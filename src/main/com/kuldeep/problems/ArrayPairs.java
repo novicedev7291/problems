@@ -2,23 +2,18 @@ package com.kuldeep.problems;
 
 
 import java.io.*;
-import java.math.*;
-import java.security.*;
-import java.text.*;
 import java.util.*;
-import java.util.concurrent.*;
-import java.util.regex.*;
 
 public class ArrayPairs {
     static int[] tree;
     static int[] a;
-    static long solve(int[] arr) {
+    static long solve1(int[] arr) {
         int n = arr.length;
         a = arr;
         int x = (int) (Math.ceil(Math.log(n) / Math.log(2)));
         int max_size = 2 * (int) Math.pow(2, x) - 1;
         tree = new int[max_size];
-        buildTree(0, 0, n-1, max_size);
+        buildTree(0, 0, n-1);
         long count = 0;
         for(int i = 0; i < n-1; i++){
             for(int j = i+1; j < n; j++){
@@ -44,16 +39,62 @@ public class ArrayPairs {
         return Math.max(maxL, maxR);
     }
 
-    static void buildTree(int node, int start, int end, int size){
+    static void buildTree(int node, int start, int end){
         if(start == end){
             tree[node] = a[start];
         }
         else{
             int mid = start + (end - start) / 2;
-            buildTree(2*node+1, start, mid, size);
-            buildTree(2*node+2, mid+1, end, size);
+            buildTree(2*node+1, start, mid);
+            buildTree(2*node+2, mid+1, end);
             tree[node] = Math.max(tree[2*node+1], tree[2*node+2]);
         }
+    }
+
+    static long solve(int[] arr){
+        n = arr.length;
+        return solveHelper(arr, 0, n-1);
+
+    }
+    static int n;
+    static long solveHelper(int[] arr, int start, int end){
+        if(start >= end || start >= n || end < 0){
+            return 0;
+        }
+        System.out.println(start+" "+ end);
+
+        int max = arr[start];
+        int k = start;
+        for(int i = start; i <= end; i++){
+            if(arr[i] > max){
+                k = i;
+                max = arr[i];
+            }
+        }
+
+        //count pairs in left array
+        int countLeft = 0;
+        for(int i = start; i < k; i++){
+            for(int j = i+1; j <= k; j++){
+                long mul = (long)arr[i]*(long)arr[j];
+                if(mul <= max){
+                    countLeft++;
+                }
+            }
+        }
+
+        //count pairs in left array
+        int countRight = 0;
+        for(int i = k+1; i < end; i++){
+            for(int j = i+1; j <= end; j++){
+                long mul = (long)arr[i]*(long)arr[j];
+                if(mul <= max){
+                    countRight++;
+                }
+            }
+        }
+        int count = countRight + countLeft;
+        return count +solveHelper(arr, start, k-1) + solveHelper(arr, k+1, end );
     }
 
     private static final Scanner scanner = new Scanner(System.in);

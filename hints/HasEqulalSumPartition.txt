@@ -1,0 +1,47 @@
+
+int mid;
+boolean isOdd = false;
+int	len;
+
+boolean hasEqualSumPartitions(int arr[]) {
+	len = arr.length;
+	return hasSumPartitionHelper(arr, 0, 0, 0);
+}
+
+// This has not worked out, need to think more
+boolean hasSumPartitionHelper(int arr[], int idx, int fps, int sps){
+	if(idx == len) return false;
+	boolean fp = hasSumPartitionHelper(arr, idx + 1, fps + arr[idx], sps);
+	boolean sp = hasSumPartitionHelper(arr, idx + 1, fps, sps + arr[idx]);
+    if(fps == sps) return true;
+    return fp || sp;
+}
+
+Second Approach:
+int len;
+boolean hasEqualSumpPartitions(int[] arr){
+    len = arr.length;
+    int sum = 0;
+    for(int i = 0; i < len; i++){
+        sum += arr[i];
+    }
+
+    if(sum%2 != 0){
+        return false;
+    }
+    return hasSumPartitionHelper(arr, 0, 0, sum/2);
+}
+
+boolean hasSumPartitionHelper(int[] arr, int idx, int sum, int sumNeeded){
+        if(idx == len) return false;
+        if(sum == sumNeeded) return true;
+        if((sum + arr[idx]) > sumNeeded){
+            return false;
+        }
+        
+        boolean hasSum = hasSumPartitionHelper(arr, idx + 1, sum + arr[idx], sumNeeded);
+        if(hasSum) return hasSum;
+        return hasSumPartitionHelper(arr, idx + 1, sum, sumNeeded);
+    }
+                
+}
