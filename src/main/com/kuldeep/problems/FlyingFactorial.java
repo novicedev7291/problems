@@ -2,7 +2,9 @@ package com.kuldeep.problems;
 
 public class FlyingFactorial {
     public static void main(String[] args) {
-        new FlyingFactorial().print(5, 1);
+        int len =12;
+        System.out.println((int) Math.floor(Math.sqrt(len)));
+        System.out.println((int) Math.ceil(Math.sqrt(len)));
     }
     public void print(int n,int num){
         while (true){
