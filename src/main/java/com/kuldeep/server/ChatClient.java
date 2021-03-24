@@ -1,5 +1,8 @@
 package com.kuldeep.server;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
@@ -11,6 +14,8 @@ public class ChatClient {
     private final PrintWriter writer;
     private final InputStream is;
     public static final int MAX_INPUT = 1024;
+
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     public ChatClient() throws IOException {
         this.ss = new Socket("localhost", ChatServer.port);
@@ -41,14 +46,13 @@ public class ChatClient {
     }
 
     private void printMessage(String message) {
-        System.out.println(message);
+        log.info(message);
     }
 
     private void sendMessage(String message) {
         new Thread(() -> {
             writer.write(message);
             writer.flush();
-//            System.out.println("Had issue sending message? " + writer.checkError());
         }).start();
     }
 }

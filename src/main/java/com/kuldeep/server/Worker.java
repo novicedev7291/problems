@@ -1,14 +1,20 @@
 package com.kuldeep.server;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 
 public class Worker implements Runnable {
+    public static final String CLIENT_PREFIX = "client-";
     private final Integer id;
     private final Socket client;
     private final ClientRepository repository;
+
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     public Worker(Integer id, Socket client, ClientRepository repo) {
         this.id = id;
@@ -28,10 +34,9 @@ public class Worker implements Runnable {
     private void joinClient() {
         try {
             MessageObserver observer = new MessageObserver(new PrintWriter(client.getOutputStream(), true));
-            String clientId = "client-" + id;
+            String clientId = CLIENT_PREFIX + id;
 
-            System.out.printf("%s joined us", clientId);
-            System.out.println();
+            log.info(clientId, "{0} joined");
 
             repository.register(clientId, observer);
         } catch (IOException ex) {
@@ -56,9 +61,9 @@ public class Worker implements Runnable {
 
                 observer = repository.findObserver(cID.trim());
                 if (observer == null)
-                    System.out.println("Client not found with ID");
+                    log.error("Client not found with ID");
                 else
-                    observer.notify(String.format("%s : %s", "client-" + id, message));
+                    observer.notify(String.format("%s : %s", CLIENT_PREFIX + id, message));
             }
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -66,7 +71,7 @@ public class Worker implements Runnable {
     }
 
     private void closeConnection() {
-        repository.removeObserver("client-"+id);
+        repository.removeObserver(CLIENT_PREFIX + id);
         try{
             client.close();
         }catch (IOException ex) {
