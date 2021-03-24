@@ -11,5 +11,6 @@ public class MessageObserver {
 
     public void notify(String message) {
         os.write(message);
+        os.flush();
     }
 }

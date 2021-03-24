@@ -36,7 +36,7 @@ public class Worker implements Runnable {
             MessageObserver observer = new MessageObserver(new PrintWriter(client.getOutputStream(), true));
             String clientId = CLIENT_PREFIX + id;
 
-            log.info(clientId, "{0} joined");
+            log.info("{} joined", clientId);
 
             repository.register(clientId, observer);
         } catch (IOException ex) {
@@ -71,7 +71,9 @@ public class Worker implements Runnable {
     }
 
     private void closeConnection() {
-        repository.removeObserver(CLIENT_PREFIX + id);
+        final String clientId = CLIENT_PREFIX + this.id;
+        log.debug("{} has said bye", clientId);
+        repository.removeObserver(clientId);
         try{
             client.close();
         }catch (IOException ex) {
