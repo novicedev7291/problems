@@ -4,12 +4,12 @@ import java.nio.file.Path;
 
 class ReadParams {
     private final Path path;
-    private final Long maxBuffer;
+    private final Long maxBytes;
     private final Long startPosition;
 
-    ReadParams(Path path, Long maxBuffer, Long startPosition) {
+    ReadParams(Path path, Long maxBytes, Long startPosition) {
         this.path = path;
-        this.maxBuffer = maxBuffer;
+        this.maxBytes = maxBytes;
         this.startPosition = startPosition;
     }
 
@@ -17,8 +17,8 @@ class ReadParams {
         return path;
     }
 
-    public Long getMaxBuffer() {
-        return maxBuffer;
+    public Long getMaxBytes() {
+        return maxBytes;
     }
 
     public Long getStartPosition() {

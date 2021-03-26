@@ -29,22 +29,22 @@ public class FileApplication {
         Set<Counter> counters = new HashSet<>();
 
         long temp = fileSize;
-        long bufferSize = 1000000L;
+        long maxBytes = 1000000L;
         long position = 0L;
+        Long totalWC = 0L;
 
         long startTime = System.currentTimeMillis();
 
-        while ( temp > 0 && (position + bufferSize) < fileSize ) {
-            counters.add(new Counter(path, bufferSize, position));
-            position += bufferSize;
-            temp = temp - bufferSize;
+        while ( temp > 0 && (position + maxBytes) < fileSize ) {
+            counters.add(new Counter(path, maxBytes, position));
+            position += maxBytes;
+            temp = temp - maxBytes;
         }
         counters.add(new Counter(path, temp, position));
 
         ExecutorService service = Executors.newFixedThreadPool(counters.size());
         List<Future<Long>> results = service.invokeAll(counters);
 
-        Long totalWC = 0L;
 
         for (Future<Long> each: results) {
             totalWC += each.get();
@@ -60,7 +60,7 @@ public class FileApplication {
         //Doing in one thread
 
         startTime = System.currentTimeMillis();
-        totalWC = wordsCounter().apply(new ReadParams(path, bufferSize, 0L));
+        totalWC = wordsCounter().apply(new ReadParams(path, fileSize, 0L));
         log.info("Completed using single thread in {}ms", (System.currentTimeMillis() - startTime));
 
         log.info("Final count of words using single thread : {}", totalWC);

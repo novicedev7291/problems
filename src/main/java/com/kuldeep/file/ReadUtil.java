@@ -22,16 +22,15 @@ class ReadUtil {
         return params -> {
             try(FileChannel channel = FileChannel.open(params.getPath())) {
                 long position = params.getStartPosition();
-                long maxBuffer = params.getMaxBuffer() + position;
+                long maxBytes = params.getMaxBytes() + position;
+                final long MAX_BUFFER = 500000L;
                 long wc = 0;
 
                 StringBuilder sb = new StringBuilder();
 
-                while(position < maxBuffer) {
-                    long remaining = maxBuffer - position;
-                    long bytesToRead = min(maxBuffer, remaining);
-
-                    log.debug("Reading from position {}", position);
+                while(position < maxBytes) {
+                    long remaining = maxBytes - position;
+                    long bytesToRead = min(MAX_BUFFER, remaining);
 
                     MappedByteBuffer bf = channel.map(READ_ONLY, position, bytesToRead);
                     if(bf != null) {
