@@ -58,10 +58,9 @@ public class FileApplication {
                 (System.currentTimeMillis() - startTime));
 
         //Doing in one thread
-        position = 0L;
 
         startTime = System.currentTimeMillis();
-        totalWC = wordsCounter().apply(new ReadParams(path, bufferSize, position));
+        totalWC = wordsCounter().apply(new ReadParams(path, bufferSize, 0L));
         log.info("Completed using single thread in {}ms", (System.currentTimeMillis() - startTime));
 
         log.info("Final count of words using single thread : {}", totalWC);

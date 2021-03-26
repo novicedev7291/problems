@@ -25,6 +25,8 @@ class ReadUtil {
                 long maxBuffer = params.getMaxBuffer() + position;
                 long wc = 0;
 
+                StringBuilder sb = new StringBuilder();
+
                 while(position < maxBuffer) {
                     long remaining = maxBuffer - position;
                     long bytesToRead = min(maxBuffer, remaining);
@@ -34,18 +36,19 @@ class ReadUtil {
                     MappedByteBuffer bf = channel.map(READ_ONLY, position, bytesToRead);
                     if(bf != null) {
                         String content = StandardCharsets.UTF_8.decode(bf).toString();
-
-                        Pattern pattern = Pattern.compile("\\w+");
-                        Matcher matcher = pattern.matcher(content);
-
-                        while (matcher.find())
-                            wc++;
+                        sb.append(content);
 
                         bf.clear();
                     }
-
                     position += bytesToRead;
                 }
+
+                Pattern pattern = Pattern.compile("\\w+");
+                Matcher matcher = pattern.matcher(sb.toString());
+
+                while (matcher.find())
+                    wc++;
+
                 return wc;
             }catch (IOException ex) {
                 log.error("Something is not right with position calculation", ex);
