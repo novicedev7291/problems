@@ -60,11 +60,9 @@ public class WordOccurrenceApplication {
 
     private static long occurrences(String word, Path path) {
         try (Scanner scanner = new Scanner(path)) {
-            long occurrences = 0;
-            while (scanner.hasNext()) {
-                if (scanner.next().equals(word)) occurrences++;
-            }
-            return occurrences;
+            return scanner.tokens()
+                    .filter(token -> token.equals(word))
+                    .count();
         } catch (IOException ex) {
             throw new UncheckedIOException(ex);
         }
