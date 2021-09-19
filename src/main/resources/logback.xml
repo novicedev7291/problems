@@ -10,4 +10,5 @@
     </root>
 
     <logger name="com.kuldeep" level="DEBUG"/>
+    <logger name="com.kuldeep.file.WordOccurrenceApplication" level="info" />
 </configuration>
