@@ -1,15 +1,19 @@
 package com.kuldeep.algorithims;
 
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class Encryption {
 
     // Complete the encryption function below.
     static String encryption(String s) {
         StringBuffer sb = new StringBuffer();
-        List<Character> l = new ArrayList();
+        List<Character> l = new ArrayList<>();
         int len = s.length();
         for(int i = 0; i < len; i++){
             char c = s.charAt(i);
@@ -35,21 +39,18 @@ public class Encryption {
         return sb.toString();
     }
 
-    private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) throws IOException {
-        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+            Scanner scanner = new Scanner(System.in)) {
 
-        String s = scanner.nextLine();
+            String s = scanner.nextLine();
 
-        String result = encryption(s);
+            String result = encryption(s);
 
-        bufferedWriter.write(result);
-        bufferedWriter.newLine();
-
-        bufferedWriter.close();
-
-        scanner.close();
+            bufferedWriter.write(result);
+            bufferedWriter.newLine();
+        }
     }
 }
 
