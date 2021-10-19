@@ -14,7 +14,9 @@ import static java.util.concurrent.Executors.newSingleThreadScheduledExecutor;
 public class FactorialSimulation {
     private static final Logger log = LoggerFactory.getLogger(FactorialSimulation.class);
     public static void main(String[] args) {
-        FactorialSimulation simulation = new FactorialSimulation(newSingleThreadScheduledExecutor());
+        ScheduledExecutorService executor = newSingleThreadScheduledExecutor();
+
+        FactorialSimulation simulation = new FactorialSimulation(executor);
 
         Runnable r = () -> {
             log.info("Calculating factorials...");
@@ -29,6 +31,7 @@ public class FactorialSimulation {
 
         simulation.timedRun(r, 5, TimeUnit.SECONDS);
 
+        executor.shutdown();
 
     }
 
