@@ -11,7 +11,7 @@ public class TrieNode {
     private String word;
 
     private TrieNode() {
-        this.nodes = new TrieNode[26];
+        this.nodes = new TrieNode[94];
     }
 
     public static TrieNode create() {
@@ -50,7 +50,7 @@ public class TrieNode {
     }
 
     private int getIdx(char ch) {
-        return Character.toLowerCase(ch) - 'a';
+        return ch - '!';
     }
 
     public boolean containsPrefix(String prefix) {
