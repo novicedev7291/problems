@@ -65,4 +65,16 @@ public class TrieNode {
 
         return true;
     }
+
+    public boolean isEndOfWord() {
+        return endOfWord;
+    }
+
+    public TrieNode childAt(int idx) {
+        return nodes[idx];
+    }
+
+    public String word() {
+        return word;
+    }
 }
