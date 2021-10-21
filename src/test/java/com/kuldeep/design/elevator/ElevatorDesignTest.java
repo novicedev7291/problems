@@ -1,4 +1,4 @@
-package com.kuldeep.design;
+package com.kuldeep.design.elevator;
 
 import org.junit.Test;
 

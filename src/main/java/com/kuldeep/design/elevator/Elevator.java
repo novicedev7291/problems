@@ -1,4 +1,4 @@
-package com.kuldeep.design;
+package com.kuldeep.design.elevator;
 
 /**
  * @author <a href="kuldeepyadav7291@gmail.com">Kuldeep</a>
