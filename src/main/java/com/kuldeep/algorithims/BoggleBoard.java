@@ -86,6 +86,9 @@ class BoggleBoard {
         if ( col - 1 >= 0) {
             neighbours.add(new Pair(row, col - 1));
         }
+        if (row - 1 >= 0 && col - 1 >= 0) {
+            neighbours.add(new Pair(row - 1, col - 1));
+        }
         return neighbours;
     }
 

@@ -33,4 +33,23 @@ public class BoggleBoardTest {
                 .containsExactlyInAnyOrder("this", "is", "a", "simple", "boggle", "board", "NOTRE-PEATED");
     }
 
+    @Test
+    public void shouldWorkInGivenCase() {
+        char[][] chars = {
+                {'a', 'b', 'c', 'd', 'e'},
+                {'f', 'g', 'h', 'i', 'j'},
+                {'k', 'l', 'm', 'n', 'o'},
+                {'p', 'q', 'r', 's', 't'},
+                {'u', 'v', 'w', 'x', 'y'}
+        };
+
+        BoggleBoard board = BoggleBoard.of(chars);
+
+        List<String> found = board.findWords(List.of("agmsy", "agmsytojed", "agmsytojedinhcbgl", "agmsytojedinhcbfl"));
+
+        assertThat(found)
+                .isNotNull().isNotEmpty().hasSize(3)
+                .containsExactlyInAnyOrder("agmsy", "agmsytojed", "agmsytojedinhcbfl");
+    }
+
 }
