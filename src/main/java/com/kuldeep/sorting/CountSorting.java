@@ -7,7 +7,6 @@ import java.util.Arrays;
  */
 class CountSorting {
     public static void main(String[] args) {
-`
         int[] arr = {7,7,7,7,7,7,7,7,7,7,6,7,7,7,7,7,7,5,7,3, 4, 1, 2, 3, 2, 1, 5, 6, 7, 5};
         arr = sort(arr);
 
