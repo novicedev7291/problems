@@ -11,7 +11,7 @@
 		<java.version>11</java.version>
 		<gson.version>2.5</gson.version>
 		<ws.version>2.1-m09</ws.version>
-		<jackson.version>2.12.2</jackson.version>
+		<jackson.version>2.13.4.1</jackson.version>
 	</properties>
 	
 	<dependencies>
